@@ -8,7 +8,7 @@ if (button) {
 }
 printOutput(add(3, 8));
 //set default arguments
-const summ = (x, y = 1) => x + y;
+const summ = (x, y = 1) => x + y; //y is set by default
 const printOutput1 = output => console.log(output);
 printOutput1(summ(7));
 //spread operator and rest parameters
