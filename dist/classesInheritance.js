@@ -51,7 +51,7 @@ class AccountingDepartment extends Department {
         this.addPayrolls(value);
     }
     describe() {
-        console.log("Department: Accounting. ID: " + this.id);
+        console.log("Accounting Department ID : " + this.id);
     }
     addEmployee(name) {
         if (name === 'John') {

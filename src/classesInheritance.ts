@@ -60,7 +60,7 @@ class AccountingDepartment extends Department {
     }
 
     describe() {
-        console.log("Department: Accounting. ID: " +this.id);
+        console.log("Accounting Department ID : " +this.id);
     }
 
     addEmployee (name: string) {
