@@ -11,7 +11,7 @@ class Person implements Greetable {
     name?: string; //optional for class in case there is no input in constractor, then name won't be sat and it's acceptable
     age = 42; // in the class that build using interface we can add new info
 
-    constructor(n?: string){ //we can use optional in constractors as well
+    constructor(n?: string){ 
         if (n){
             this.name = n;
         }        
