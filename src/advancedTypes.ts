@@ -22,3 +22,57 @@ type Combinable = string | number;
 type Numeric = number | number;
 
 type Universal = Combinable & Numeric;
+
+//Type Guards
+
+function compute(a: Combinable, b: Combinable) {
+    if (typeof a === "string" || typeof b === 'string') {
+        return a.toString () + b.toString()
+    }
+    return a+b;
+}
+
+type UnknownEmployee = Admin | Employee;
+
+function printEmployeeInfo(employee: UnknownEmployee){
+    console.log ("Name: " + employee.name);
+    if ('privileges' in employee) {
+        console.log ("Privileges: " + employee.privileges);
+    }
+    if ('startDate' in employee) {
+        console.log ("StartDade: " + employee.startDate);
+    }
+}
+
+printEmployeeInfo(e1);
+printEmployeeInfo({name: 'Anna', startDate: new Date()});
+
+class Car{
+    drive() {
+        console.log("Driving...");
+    }
+}
+
+class Truck {
+    drive() {
+        console.log("Driving truck...");
+    }
+    loadCargo(amount: number) {
+        console.log ("Loading cargo ..." + amount);
+    }   
+}
+
+type Vehicle = Car | Truck;
+
+const v1 = new Car();
+const v2 = new Truck();
+
+function useVehicle(vehicle: Vehicle) { 
+    vehicle.drive();
+    if (vehicle instanceof Truck) { //check if object is based on class
+        vehicle.loadCargo(1000);
+    }
+}
+
+useVehicle(v1);
+useVehicle(v2);
