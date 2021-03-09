@@ -106,3 +106,12 @@ function moveAnimal(animal: Animal) {
 moveAnimal({type: "bird", flyingSpeed: 12});
 
 //Type Casting
+
+const paragraph = <HTMLInputElement> document.querySelector('p'); // casting to TS that the element is taken from HTML file
+const paragraph1 = document.getElementById('message-output');
+
+const userInputElement = document.getElementById('user-input')! as HTMLInputElement; //another way to cast
+
+userInputElement.value = "Hi there!"
+
+//Index Properties
