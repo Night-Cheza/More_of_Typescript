@@ -46,3 +46,16 @@ function useVehicle(vehicle) {
 }
 useVehicle(v1);
 useVehicle(v2);
+function moveAnimal(animal) {
+    let speed;
+    switch (animal.type) { //check properties which are available for the object
+        case "bird":
+            speed = animal.flyingSpeed;
+            break;
+        case "horse":
+            speed = animal.runningSpeed;
+    }
+    console.log("Moving speed is: " + speed);
+}
+moveAnimal({ type: "bird", flyingSpeed: 12 });
+//Type Casting

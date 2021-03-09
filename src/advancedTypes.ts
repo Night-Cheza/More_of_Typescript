@@ -76,3 +76,33 @@ function useVehicle(vehicle: Vehicle) {
 
 useVehicle(v1);
 useVehicle(v2);
+
+//Discriminated Unions
+
+interface Bird {
+    type: "bird"; //common property in every object that describes object
+    flyingSpeed: number;
+}
+
+interface Horse {
+    type: "horse"; //common property in every object that describes object. Used in our check
+    runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+    let speed;
+    switch (animal.type) { //check properties which are available for the object
+        case "bird":
+            speed = animal.flyingSpeed;
+            break;
+        case "horse":
+            speed = animal.runningSpeed;
+    }
+    console.log("Moving speed is: " + speed);
+}
+
+moveAnimal({type: "bird", flyingSpeed: 12});
+
+//Type Casting
