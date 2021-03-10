@@ -63,4 +63,16 @@ const paragraph = document.querySelector('p'); // casting to TS that the element
 const paragraph1 = document.getElementById('message-output');
 const userInputElement = document.getElementById('user-input'); //another way to cast
 userInputElement.value = "Hi there!";
-//Index Properties
+const ErrorBox = {
+    email: "Not a valid email",
+    username: "Must start with a capital character"
+};
+function add2(a, b) {
+    if (typeof a === "string" || typeof b === 'string') {
+        return a.toString() + b.toString();
+    }
+    return a + b;
+}
+const result = add2(1, 5);
+const result1 = add2("Anne", "Johnson");
+result1.split(" ");

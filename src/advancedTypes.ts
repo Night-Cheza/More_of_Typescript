@@ -114,4 +114,35 @@ const userInputElement = document.getElementById('user-input')! as HTMLInputElem
 
 userInputElement.value = "Hi there!"
 
-//Index Properties
+//Index Properties (types)
+
+interface ErrorContainer { //container might stored universal info/form for cases that might trigger errors
+    [property: string]: string; //whatever object triggers this error container has to have property as a string (ex: email, username)and value of the property is string
+}
+
+const ErrorBox: ErrorContainer ={
+    email: "Not a valid email",
+    username: "Must start with a capital character"
+};
+
+//Function Overload
+
+type Combinable1 = string | number;
+type Numeric1 = number | number;
+
+type Universal1 = Combinable1 & Numeric1;
+
+function add2(a: number, b: number): number;
+function add2(a: string, b: string): string;
+function add2(a: number, b: string): string;
+function add2(a: string, b: number): string;
+function add2(a: Combinable1, b: Combinable1) {
+    if (typeof a === "string" || typeof b === 'string') {
+        return a.toString () + b.toString();
+    }
+    return a+b;
+}
+
+const result = add2(1,5);
+const result1 = add2("Anne", "Johnson");
+result1.split(" ");
