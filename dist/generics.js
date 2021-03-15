@@ -30,7 +30,7 @@ class DataStorage {
         this.data.push(item);
     }
     removeItem(item) {
-        this.data.splice(this.data.indexOf(item), 1);
+        this.data.splice(this.data.indexOf(item), 1); //works only for primitive types, otherwise need to add extra check
     }
     getItems() {
         return [...this.data];
@@ -41,3 +41,4 @@ textStorage.addItem("Gorik");
 textStorage.addItem("Jinn");
 textStorage.removeItem("Gorik");
 console.log(textStorage.getItems());
+const numberStorage = new DataStorage();

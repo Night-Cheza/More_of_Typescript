@@ -40,7 +40,7 @@ class DataStorage <T> { //generic class we can call whenever we need to store an
         this.data.push(item);
     }
 
-    removeItem(item:T) {
+    removeItem(item: T) {
         this.data.splice(this.data.indexOf(item), 1); //works only for primitive types, otherwise need to add extra check
     }
 
