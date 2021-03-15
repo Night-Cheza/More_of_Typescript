@@ -1,3 +1,9 @@
+function Logger(target: Function){
+    console.log("Loggin...");
+    console.log(target);
+}
+
+@Logger
 class Person1{
     name = "Max";
 
