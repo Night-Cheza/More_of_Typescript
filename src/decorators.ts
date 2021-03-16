@@ -69,3 +69,54 @@ const pers2 = new Person2();
 console.log(pers2);
 
 //multiple decorators
+
+function Log(target: any, propertyName: string | Symbol){ //property decorator, takes 2 arguments
+    console.log("Property decorator");
+    console.log(target, propertyName);
+}
+
+function Log2(target: any, name: string |Symbol, descriptor: PropertyDescriptor){ //accessor decorator, takes 3 arguments
+    console.log("Accessor decorator");
+    console.log(target);
+    console.log(name);
+    console.log(descriptor);
+}
+
+function Log3(target: any, name: string | Symbol, descriptor: PropertyDescriptor){  //method decorator, takes 3 arguments
+    console.log("Method decorator");
+    console.log(target);
+    console.log(name);
+    console.log(descriptor);
+}
+
+function Log4(target: any, name /*of method this parameter is in*/: string | Symbol, position: number) {
+    console.log("Parameter decorator");
+    console.log(target);
+    console.log(name);
+    console.log(position);
+}
+
+class Product {
+    @Log            //property decorator
+    title: string;
+    private _price: number;
+
+    @Log2           //accessor decorator
+    set price(val: number) {
+        if (val > 0) {
+            this._price = val;
+        } else {
+            throw new Error("Invalid price");
+        }
+    }
+
+    constructor(t: string, p: number){
+        this.title = t;
+        this._price = p;
+    }
+
+    @Log3         //metod decorator
+    getPriceWithTax(@Log4 tax: number){ //parameter decorator
+        return this._price * (1+tax);
+    }
+}
