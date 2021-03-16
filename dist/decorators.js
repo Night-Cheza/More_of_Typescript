@@ -48,12 +48,18 @@ console.log(pers);
 //decorators and work with HTML
 function WithTemplate(template, hookID) {
     console.log("TEMPLATE FACTORY");
-    return function (_) {
-        console.log("Rendering template");
-        const hookElement = document.getElementById(hookID);
-        if (hookElement) {
-            hookElement.innerHTML = template;
-        }
+    return function (originalConstructor) {
+        return class extends originalConstructor {
+            constructor(..._) {
+                super();
+                console.log("Rendering template");
+                const hookElement = document.getElementById(hookID);
+                if (hookElement) {
+                    hookElement.innerHTML = template;
+                    hookElement.querySelector("h1").textContent = this.name;
+                }
+            }
+        };
     };
 }
 let Person2 = class Person2 {

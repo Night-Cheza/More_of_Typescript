@@ -45,13 +45,19 @@ console.log(pers);
 
 function WithTemplate(template: string, hookID: string) {
     console.log("TEMPLATE FACTORY");
-    return function(_: Function) { // _ says to ts that I get an argument which I don't need, I'm aware I have it, but I don't use it.
-       console.log("Rendering template");
-       const hookElement = document.getElementById(hookID);
-       if (hookElement) {
-           hookElement.innerHTML = template;
-       }
-    }
+    return function<T extends {new(...args: any[]): {name: string}}>(originalConstructor: T) { // _ says to ts that I get an argument which I don't need, I'm aware I have it, but I don't use it.
+        return class extends originalConstructor {
+            constructor(..._: any[]) {
+                super();
+                console.log("Rendering template");
+                const hookElement = document.getElementById(hookID);
+                if (hookElement) {
+                    hookElement.innerHTML = template;
+                    hookElement.querySelector("h1")!.textContent = this.name;
+                }
+            }
+        };
+    };
 }
 
 @Logger("Loggin...")
