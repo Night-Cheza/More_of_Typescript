@@ -1,12 +1,16 @@
 "use strict";
 //arrow functions
-const add = (a, b) => a + b;
-const printOutput = output => console.log(output);
+/* const add = (a: number, b: number) => a+b;
+
+const printOutput: (a: number | string) => void = output => console.log(output);
+
 const button = document.querySelector('button');
+
 if (button) {
-    button.addEventListener('click', event => console.log(event));
+    button.addEventListener('click', event =>console.log(event));
 }
-printOutput(add(3, 8));
+
+printOutput(add(3,8)); */
 //set default arguments
 const summ = (x, y = 1) => x + y; //y is set by default
 const printOutput1 = output => console.log(output);

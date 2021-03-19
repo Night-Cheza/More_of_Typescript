@@ -55,4 +55,5 @@ textStorage.addItem("Jinn");
 textStorage.removeItem("Gorik");
 console.log(textStorage.getItems());
 
-const numberStorage = new DataStorage<number>();
+const numberStorage = new DataStorage<number>(); 
+

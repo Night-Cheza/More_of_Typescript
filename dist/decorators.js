@@ -125,3 +125,45 @@ __decorate([
     ,
     __param(0, Log4)
 ], Product.prototype, "getPriceWithTax", null);
+//bind decorator
+function Autobind(/*target*/ _, /*methodName*/ _2, descriptor) {
+    const originalMethod = descriptor.value;
+    const adjustedDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this);
+            return boundFn;
+        }
+    };
+    return adjustedDescriptor;
+}
+class Printer {
+    constructor() {
+        this.message = "This works!";
+    }
+    showMessage() {
+        console.log(this.message);
+    }
+}
+__decorate([
+    Autobind
+], Printer.prototype, "showMessage", null);
+const pr = new Printer();
+const button = document.querySelector('button');
+button.addEventListener('click', pr.showMessage);
+//validation with decorators
+class Course {
+    constructor(t, p) {
+        this.title = t;
+        this.price = p;
+    }
+}
+const courseForm = document.querySelector("form");
+courseForm.addEventListener("submit", event => {
+    event.preventDefault(); //if I fill the form, there will not be http request - for now
+    const titleEl = document.getElementById("title");
+    const priceEl = document.getElementById("price");
+    const title = titleEl.value;
+    const price = +priceEl.value;
+});

@@ -126,3 +126,54 @@ class Product {
         return this._price * (1+tax);
     }
 }
+
+//bind decorator
+
+function Autobind (/*target*/_: any, /*methodName*/_2: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value;
+    const adjustedDescriptor: PropertyDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this);
+            return boundFn;
+        }
+    };
+    return adjustedDescriptor;
+}
+
+class Printer {
+    message = "This works!";
+
+    @Autobind
+    showMessage() {
+        console.log(this.message);
+    }
+}
+
+const pr = new Printer();
+
+const button = document.querySelector('button')!;
+button.addEventListener('click', pr.showMessage);
+
+//validation with decorators
+
+class Course {
+    title: string;
+    price: number;
+
+    constructor(t: string, p: number) {
+        this.title = t;
+        this.price = p;
+    }
+}
+
+const courseForm = document.querySelector("form")!;
+courseForm.addEventListener("submit", event =>{
+    event.preventDefault(); //if I fill the form, there will not be http request - for now
+    const titleEl = document.getElementById("title") as HTMLInputElement;
+    const priceEl = document.getElementById("price") as HTMLInputElement;
+
+    const title = titleEl.value;
+    const price = +priceEl.value;
+});
