@@ -152,13 +152,45 @@ __decorate([
 const pr = new Printer();
 const button = document.querySelector('button');
 button.addEventListener('click', pr.showMessage);
-//validation with decorators
+const registeredValidator = {};
+function Required(target, propName) {
+    registeredValidator[target.constructor.name] = Object.assign(Object.assign({}, registeredValidator[target.constructor.name]), { [propName]: [...registeredValidator[target.constructor.name][propName], 'required'] });
+}
+function PositiveNumber(target, propName) {
+    registeredValidator[target.constructor.name] = Object.assign(Object.assign({}, registeredValidator[target.constructor.name]), { [propName]: [...registeredValidator[target.constructor.name][propName], 'positive'] });
+}
+function validate(obj) {
+    const objValidatorConfig = registeredValidator[obj.constructor.name];
+    if (!objValidatorConfig) {
+        return true;
+    }
+    let isValid = true;
+    for (const prop in objValidatorConfig) {
+        for (const validator of objValidatorConfig[prop]) {
+            switch (validator) {
+                case 'required':
+                    isValid = isValid && !!obj[prop];
+                    break;
+                case 'positive':
+                    isValid = isValid && obj[prop] > 0;
+                    break;
+            }
+        }
+    }
+    return isValid;
+}
 class Course {
     constructor(t, p) {
         this.title = t;
         this.price = p;
     }
 }
+__decorate([
+    Required
+], Course.prototype, "title", void 0);
+__decorate([
+    PositiveNumber
+], Course.prototype, "price", void 0);
 const courseForm = document.querySelector("form");
 courseForm.addEventListener("submit", event => {
     event.preventDefault(); //if I fill the form, there will not be http request - for now
@@ -166,4 +198,10 @@ courseForm.addEventListener("submit", event => {
     const priceEl = document.getElementById("price");
     const title = titleEl.value;
     const price = +priceEl.value;
+    const createdCourse = new Course(title, price);
+    if (!validate(createdCourse)) {
+        alert("Invalid imput. Please try again");
+        return;
+    }
+    console.log(createdCourse);
 });
