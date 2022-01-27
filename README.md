@@ -1,3 +1,3 @@
 # More_of_Typescript
 
-Learning Typescript using udemy (udemy.com) course. Have strong feeling that I'm missing some fundomental knowledge. Decided to go to college.
+Continuation of learning Typescropt with course on udemy.com (https://www.udemy.com/course/understanding-typescript/learn/lecture/16935858#overview)
